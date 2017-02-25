@@ -8,8 +8,10 @@
 #else
 	#include "WProgram.h"
 #endif
-#endif
 
+
+#include <Adafruit_MotorShield.h>
+#include "utility/Adafruit_MS_PWMServoDriver.h"
 enum MOTORS { FRONT_RIGHT, FRONT_LEFT, BACK_RIGHT, BACK_LEFT };
 
 // Initialisierung der Bewegungsteile
@@ -17,3 +19,5 @@ void setupMove();
 
 // folge dem Joystick
 void followJoystick();
+
+#endif

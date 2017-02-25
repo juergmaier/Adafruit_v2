@@ -1,19 +1,14 @@
 #include "Move.h"
 #include "Distance.h"
+#include "Tisch.h"
+
 #include <Wire.h>
-#include <Adafruit_MotorShield.h>
-#include "utility/Adafruit_MS_PWMServoDriver.h"
+//#include <Adafruit_MotorShield.h>
+//#include "utility/Adafruit_MS_PWMServoDriver.h"
 
 
-typedef enum MOVEMENT {
-	VORWAERTS, VOR_DIAG_RECHTS, VOR_DIAG_LINKS,
-	LINKS, RECHTS,
-	RUECKWAERTS, RUECK_DIAG_RECHTS, RUECK_DIAG_LINKS,
-	DREHEN_LINKS, DREHEN_RECHTS
-} MOVEMENT;
 
-
-float rate = 10;  // loop cycle/s
+int loopCount;
 
 void setup() {
 
@@ -21,12 +16,21 @@ void setup() {
 
   setupDistanzMessung();
 
+  setupTisch();
+
   Serial.begin(115200);
+
+  Serial.println("adafruit_v2.setup done");
 }
 
 void loop() {
 
+	// loopcount zählt durch die einzelnen Servoschritte
+	loopCount++;
+	loopCount = loopCount%ANZ_MESSUNGEN_PRO_SCAN;
+
 	followJoystick();
 
-	delay(1/rate * 1000);	// ms
+	//delay((1/rate) * 1000);	// ms
+	delay(2000);
 }

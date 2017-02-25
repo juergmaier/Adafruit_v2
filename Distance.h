@@ -11,7 +11,7 @@
 
 #endif
 
-//#include "Move.h"
+#include "Adafruit_v2.h"
 
 //
 // Die Struktur der Parameter des Infrarot-Entfernungsmessers
@@ -22,16 +22,24 @@ typedef struct ir_sensor {
 	const signed short k;
 } ir_sensor;
 
-typedef struct distanzSensor {
+typedef struct distanzSensorWerte {
 	int AnalogWert;
 	unsigned long letzteMessung;
-	unsigned long nextFullScanDone;
-	signed short Distanz;
-	boolean Hindernis;
-	boolean Abgrund;
-} distanzSensor;
+	int Distanz;
+} distanzSensorWerte;
 
+typedef struct servoWerte {
+	boolean attached;
+	int messrichtung;
+	int delta;
+} senrvoWerte;
+
+extern int loopCount;
+
+// funktionen
 void setupDistanzMessung();
 
-//int freieFahrt(MOVEMENT Richtung);
+void ermittleDistanzen(MOVEMENT Richtung);
+
+int freieFahrt(MOVEMENT Richtung);
 
